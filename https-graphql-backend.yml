@@ -7,5 +7,3 @@ functions:
     lang: node-typescript-express
     handler: ./https-rest-auth
     image: rafaelpernil/https-rest-auth:latest
-    secrets:
-      - allotr-https-rest-auth-secret
