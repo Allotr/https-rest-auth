@@ -122,7 +122,7 @@ function initializeGooglePassport(app: express.Express) {
 
 
     // Google Oauth
-    app.get("/auth/google",
+    app.get("/",
         (req, res, next) => {
             // Save the url of the user's current page so the app can redirect back to it after authorization
             req.session.returnTo = req.get('referer') ? req.get('referer')! : REDIRECT_URL;
@@ -133,14 +133,14 @@ function initializeGooglePassport(app: express.Express) {
         })
     );
 
-    app.get('/auth/google/redirect',
+    app.get('/redirect',
         passport.authenticate('google', {
             failureRedirect: '/failed',
             successReturnToOrRedirect: REDIRECT_URL,
             keepSessionInfo: true
         }));
 
-    app.get("/auth/google/logout", (req, res, next) => {
+    app.get("/logout", (req, res, next) => {
         req.session.destroy((err) => {
             if (err) {
                 return next(err);
@@ -149,6 +149,6 @@ function initializeGooglePassport(app: express.Express) {
         });
     });
 
-    app.get("/auth/google/failed", (req, res) => res.send("Failed"));
+    app.get("/failed", (req, res) => res.send("Failed"));
 }
 export { initializeGooglePassport }
