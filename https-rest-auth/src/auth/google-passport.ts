@@ -121,10 +121,6 @@ function initializeGooglePassport(app: express.Express) {
     });
 
 
-    app.get("/", (req, res) => res.json({ message: "You are not logged in" }));
-
-    app.get("/failed", (req, res) => res.send("Failed"));
-
     // Google Oauth
     app.get("/auth/google",
         (req, res, next) => {
@@ -152,5 +148,7 @@ function initializeGooglePassport(app: express.Express) {
             res.redirect(REDIRECT_URL);
         });
     });
+
+    app.get("/auth/google/failed", (req, res) => res.send("Failed"));
 }
 export { initializeGooglePassport }
