@@ -135,7 +135,7 @@ function initializeGooglePassport(app: express.Express) {
 
     app.get('/auth/google/redirect',
         passport.authenticate('google', {
-            failureRedirect: '/failed',
+            failureRedirect: '/auth/google/failed',
             successReturnToOrRedirect: REDIRECT_URL,
             keepSessionInfo: true
         }));
