@@ -149,6 +149,6 @@ function initializeGooglePassport(app: express.Express) {
         });
     });
 
-        app.get("/auth/google/failed", (req, res) => res.send("Failed"));
+    app.get("/auth/google/failed", (req, res) => res.send("Failed"));
 }
 export { initializeGooglePassport }
