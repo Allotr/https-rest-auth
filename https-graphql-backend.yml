@@ -1,0 +1,11 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: https://openfaas.allotr.eu
+functions:
+  https-rest-auth:
+    lang: node-typescript-express
+    handler: ./https-rest-auth
+    image: rafaelpernil/https-rest-auth:latest
+    secrets:
+      - allotr-https-rest-auth-secret
