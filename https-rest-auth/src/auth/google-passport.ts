@@ -11,9 +11,6 @@ import { USERS, USER_WHITELIST } from "../consts/collections";
 import { getMongoDBConnection } from "../utils/mongodb-connector";
 import { getBooleanByString } from "../utils/data-util";
 
-const cors = require('cors');
-
-
 
 function initializeGooglePassport(app: express.Express) {
     const {
@@ -25,17 +22,6 @@ function initializeGooglePassport(app: express.Express) {
         REDIRECT_URL,
         WHITELIST_MODE
     } = getLoadedEnvVariables();
-    const corsOptions = {
-        origin: (origin, next) => {
-            // Test for main domain and all subdomains
-            if (origin == null || origin === 'https://allotr.eu' || /^https:\/\/\w+?\.allotr\.eu$/gm.test(origin)) {
-                next(null, true)
-            } else {
-                next(new Error('Not allowed by CORS'))
-            }
-        },
-        credentials: true // <-- REQUIRED backend setting
-    };
 
     const sessionMiddleware = session({
         secret: SESSION_SECRET,
@@ -47,8 +33,6 @@ function initializeGooglePassport(app: express.Express) {
 
     const passportMiddleware = passport.initialize();
     const passportSessionMiddleware = passport.session();
-
-    app.use(cors(corsOptions));
 
     app.use(sessionMiddleware)
     app.use(passportMiddleware)
