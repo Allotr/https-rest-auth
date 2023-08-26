@@ -125,7 +125,7 @@ function initializeGooglePassport(app: express.Express) {
         }));
 
     app.get("/auth/google/logout", (req, res, next) => {
-        req.session.destroy((err) => {
+        req.logout((err) => {
             if (err) {
                 return next(err);
             }
