@@ -10,6 +10,7 @@ import MongoStore from 'connect-mongo';
 import { USERS, USER_WHITELIST } from "../consts/collections";
 import { getMongoDBConnection } from "../utils/mongodb-connector";
 import { getBooleanByString } from "../utils/data-util";
+import { clearCache, clearUserCache, initializeRedisCache } from "../cache/envelop-responsecache";
 
 
 function initializeGooglePassport(app: express.Express) {
@@ -37,6 +38,8 @@ function initializeGooglePassport(app: express.Express) {
     app.use(sessionMiddleware)
     app.use(passportMiddleware)
     app.use(passportSessionMiddleware)
+
+    initializeRedisCache();
 
     passport.use(
         new GoogleStrategy(
@@ -84,6 +87,9 @@ function initializeGooglePassport(app: express.Express) {
                     await db.collection<UserDbObject>(USERS).insertOne(userToCreate)
                     await db.collection<UserDbObject>(USERS).createIndex({ username: "text", name: "text", surname: "text" })
 
+                    // Clear user cache if new user is registered
+                    clearUserCache()
+
                     done(null, userToCreate);
                 }
             })
@@ -124,7 +130,10 @@ function initializeGooglePassport(app: express.Express) {
             keepSessionInfo: true
         }));
 
-    app.get("/auth/google/logout", (req, res, next) => {
+    app.get("/auth/google/logout", async (req, res, next) => {
+        // Clean cached resources
+        clearCache();
+        
         req.logOut((err) => {
             if (err) {
                 return next(err);

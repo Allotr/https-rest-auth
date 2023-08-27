@@ -10,7 +10,9 @@ function getLoadedEnvVariables(): EnvObject {
         SESSION_SECRET: undefined,
         REDIRECT_URL: undefined,
         HTTPS_PORT: undefined,
-        WHITELIST_MODE: undefined
+        WHITELIST_MODE: undefined,
+        REDIS_ENDPOINT: undefined,
+        REDIS_PORT: undefined
     }
     const loadedVariables = Object.fromEntries(Object.entries(variablesToLoad).map(([key]) => ([key, process.env[key]]))) as EnvObject;
     areVariablesValid(loadedVariables);

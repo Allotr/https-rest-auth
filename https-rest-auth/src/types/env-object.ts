@@ -7,5 +7,7 @@ export interface EnvObject extends Record<string, string> {
     SESSION_SECRET: string,
     REDIRECT_URL: string,
     HTTPS_PORT: string,
-    WHITELIST_MODE: string
+    WHITELIST_MODE: string,
+    REDIS_ENDPOINT: string,
+    REDIS_PORT: string
 }

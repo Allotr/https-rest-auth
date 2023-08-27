@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0",
     "build": "tsc --build ./tsconfig.json",
-    "start": "node ../dist/function/index.js"
+    "watch-build": "tsc --build --watch ./tsconfig.json",
+    "start": "node ../dist/function/index.js",
+    "start-local": "node ./dist/function/index.js"
   },
   "keywords": [],
   "author": "",
@@ -19,9 +21,12 @@
     "typescript": "^4.3.2"
   },
   "dependencies": {
+    "@envelop/response-cache": "^5.1.0",
+    "@envelop/response-cache-redis": "^3.1.0",
     "allotr-graphql-schema-types": "1.0.1",
     "connect-mongo": "^4.5.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-session": "^1.17.2",
     "mongodb": "^4.1.0",
