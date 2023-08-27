@@ -129,6 +129,7 @@ function initializeGooglePassport(app: express.Express) {
             if (err) {
                 return next(err);
             }
+            res.clearCookie('connect.sid');
             req.session.destroy((err) => {
                 if (err) {
                     return next(err);
