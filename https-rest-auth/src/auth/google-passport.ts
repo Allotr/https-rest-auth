@@ -125,11 +125,16 @@ function initializeGooglePassport(app: express.Express) {
         }));
 
     app.get("/auth/google/logout", (req, res, next) => {
-        req.logout((err) => {
+        req.logOut((err) => {
             if (err) {
                 return next(err);
             }
-            res.redirect(REDIRECT_URL);
+            req.session.destroy((err) => {
+                if (err) {
+                    return next(err);
+                }
+                res.redirect(REDIRECT_URL);
+            })
         });
     });
 
