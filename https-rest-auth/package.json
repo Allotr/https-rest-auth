@@ -23,13 +23,13 @@
   "dependencies": {
     "@envelop/response-cache": "^5.1.0",
     "@envelop/response-cache-redis": "^3.1.0",
-    "allotr-graphql-schema-types": "1.0.1",
+    "allotr-graphql-schema-types": "3.0.4",
     "connect-mongo": "^4.5.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-session": "^1.17.2",
-    "mongodb": "^4.1.0",
+    "mongodb": "^4.17.1",
     "passport": "^0.6.0",
     "passport-google-oauth20": "^2.0.0"
   }
