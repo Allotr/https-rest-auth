@@ -1,0 +1,77 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: https-rest-auth
+  namespace: allotr
+  labels:
+    app: https-rest-auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: https-rest-auth
+  template:
+    metadata:
+      labels:
+        app: https-rest-auth
+    spec:
+      containers:
+        - name: https-rest-auth
+          image: rafaelpernil/https-rest-auth:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              memory: 1Gi
+              cpu: "500m"
+            requests:
+              memory: 1Gi
+              cpu: "250m"
+          env:
+            - name:  SESSION_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name:  https-rest-auth-secret
+                  key:  SESSION_SECRET
+            - name:  REDIRECT_URL
+              valueFrom:
+                secretKeyRef:
+                  name:  https-rest-auth-secret
+                  key:  REDIRECT_URL
+            - name:  MONGO_DB_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name:  https-rest-auth-secret
+                  key:  MONGO_DB_ENDPOINT
+            - name:  VAPID_PUBLIC_KEY
+              valueFrom:
+                secretKeyRef:
+                  name:  https-rest-auth-secret
+                  key:  VAPID_PUBLIC_KEY
+            - name:  VAPID_PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name:  https-rest-auth-secret
+                  key:  VAPID_PRIVATE_KEY
+            - name:  REDIS_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name:  https-rest-auth-secret
+                  key:  REDIS_ENDPOINT
+            - name:  REDIS_PORT
+              valueFrom:
+                secretKeyRef:
+                  name:  https-rest-auth-secret
+                  key:  REDIS_PORT
+            - name:  DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name:  https-rest-auth-secret
+                  key:  DB_NAME
+            - name:  HTTPS_PORT
+              valueFrom:
+                secretKeyRef:
+                  name:  https-rest-auth-secret
+                  key:  HTTPS_PORT
+      restartPolicy: Always

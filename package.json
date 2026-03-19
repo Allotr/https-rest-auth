@@ -2,13 +2,12 @@
   "name": "allotr-https-rest-auth",
   "version": "1.0.0",
   "description": "A REST microservice to authenticate into api.allotr.eu",
-  "main": "handler.ts",
+  "main": "./dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0",
-    "build": "tsc --build ./tsconfig.json",
+    "build": "tsc -build tsconfig.json",
     "watch-build": "tsc --build --watch ./tsconfig.json",
-    "start": "node ../dist/function/index.js",
-    "start-local": "node ./dist/function/index.js"
+    "start": "node ./dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +17,7 @@
     "@types/express-session": "^1.17.4",
     "@types/passport": "^1.0.12",
     "@types/passport-google-oauth20": "^2.0.11",
+    "@types/ioredis": "4.28.2",
     "typescript": "^4.3.2"
   },
   "dependencies": {
@@ -31,6 +31,7 @@
     "express-session": "^1.17.2",
     "mongodb": "^4.17.1",
     "passport": "^0.6.0",
-    "passport-google-oauth20": "^2.0.0"
+    "passport-google-oauth20": "^2.0.0",
+    "ioredis": "4.28.2"
   }
 }

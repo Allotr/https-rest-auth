@@ -4,7 +4,7 @@ const cors = require('cors');
 
 function initializeCORS(app: Express) {
     const corsOptions = {
-        origin: (origin, next) => {
+        origin: (origin: any, next: any) => {
             // Test for main domain and all subdomains
             if (origin == null || origin === 'https://allotr.eu' || /^https:\/\/.+?\.allotr\.eu$/gm.test(origin)) {
                 next(null, true)

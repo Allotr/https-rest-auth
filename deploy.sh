@@ -1,4 +1,6 @@
 #!/bin/bash
-rm -rf ./template
-faas-cli template pull https://github.com/rafaelpernil2/openfaas-template-node-typescript-express
-faas-cli deploy -f ./https-rest-auth.yml
+kubectl apply -f ./artifacts/deployment.yaml
+kubectl apply -f ./artifacts/service.yaml
+
+kubectl scale --replicas=0 deployment https-rest-auth -n allotr
+kubectl scale --replicas=1 deployment https-rest-auth -n allotr

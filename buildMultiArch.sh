@@ -1,6 +1,4 @@
 #!/bin/bash
-docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-export DOCKER_CLI_EXPERIMENTAL=enabled
-rm -rf ./template
-faas-cli template pull https://github.com/rafaelpernil2/openfaas-template-node-typescript-express
-faas-cli publish -f https-rest-auth.yml --platforms linux/arm/v7,linux/amd64
+docker tag https-rest-auth rafaelpernil/https-rest-auth
+docker buildx build --push --platform linux/arm64,linux/amd64  --tag rafaelpernil/https-rest-auth .
+
