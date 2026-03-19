@@ -29,6 +29,26 @@ spec:
               memory: 1Gi
               cpu: "250m"
           env:
+            - name:  GOOGLE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name:  https-rest-auth-secret
+                  key:  GOOGLE_CLIENT_ID
+            - name:  GOOGLE_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name:  https-rest-auth-secret
+                  key:  GOOGLE_CLIENT_SECRET
+            - name:  GOOGLE_CALLBACK_URL
+              valueFrom:
+                secretKeyRef:
+                  name:  https-rest-auth-secret
+                  key:  GOOGLE_CALLBACK_URL
+            - name:  WHITELIST_MODE
+              valueFrom:
+                secretKeyRef:
+                  name:  https-rest-auth-secret
+                  key:  WHITELIST_MODE
             - name:  SESSION_SECRET
               valueFrom:
                 secretKeyRef:
@@ -44,16 +64,6 @@ spec:
                 secretKeyRef:
                   name:  https-rest-auth-secret
                   key:  MONGO_DB_ENDPOINT
-            - name:  VAPID_PUBLIC_KEY
-              valueFrom:
-                secretKeyRef:
-                  name:  https-rest-auth-secret
-                  key:  VAPID_PUBLIC_KEY
-            - name:  VAPID_PRIVATE_KEY
-              valueFrom:
-                secretKeyRef:
-                  name:  https-rest-auth-secret
-                  key:  VAPID_PRIVATE_KEY
             - name:  REDIS_ENDPOINT
               valueFrom:
                 secretKeyRef:
